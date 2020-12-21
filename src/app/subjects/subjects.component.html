@@ -1,0 +1,12 @@
+<table *ngIf="subjects" class="table">
+  <tr><th>Subject name</th><th>Study year</th><th></th></tr>
+  <tr *ngFor="let subject of subjects">
+    <td>{{subject.name}}</td>
+    <td>{{subject.studyYear}}</td>
+    <td><a type="button" class="btn btn-outline-primary"
+           [routerLink]="['/presence', subject.id]">
+      Show presences
+        </a></td>
+  </tr>
+</table>
+

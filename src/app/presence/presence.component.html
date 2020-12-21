@@ -1,0 +1,31 @@
+<h2 *ngIf="subject">Presences for subject {{subject.name}}</h2>
+<div *ngIf="selectedPresence">
+  <section>
+    <select class="form-control" [(ngModel)]="selectedPresence">
+      <option *ngFor="let presence of presences" [ngValue]="presence">
+        {{localDateTime(presence.when)}}
+      </option>
+    </select>
+  </section>
+  <p>Date and time: <strong>{{localDateTime(selectedPresence.when)}}</strong></p>
+  <p>Presented students:</p>
+  <ul>
+    <li *ngFor="let student of selectedPresence.students">
+      {{student.name}} {{student.surname}}
+    </li>
+  </ul>
+</div>
+<button type="button" class="btn btn-primary" 
+        data-toggle="modal" data-target="#exampleModal"
+        (click)="addNewPresence()">
+  Add presence
+</button>
+<button type="button" class="btn btn-warning" 
+        data-toggle="modal" data-target="#exampleModal"
+        (click)="editPresence()">
+  Edit presence
+</button>
+<button type="button" class="btn btn-danger" (click)="deletePresence()" [disabled]="!selectedPresence">
+  Delete presence
+</button>
+<app-presence-edit [presence]="presenceToEdit" (save)="savePresence($event)"></app-presence-edit>
